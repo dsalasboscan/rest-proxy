@@ -1,0 +1,9 @@
+version: '3'
+services:
+  mongo:
+    image: mongo:latest
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./mongo/launch.sh:/tmp/launch.sh:ro
+    ports:
+      - "27017:27017"
