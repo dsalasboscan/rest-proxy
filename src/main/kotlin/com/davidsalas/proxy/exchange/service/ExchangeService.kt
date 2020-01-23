@@ -1,9 +1,10 @@
 package com.davidsalas.proxy.exchange.service
 
+import com.davidsalas.proxy.exchange.exception.HttpClientGenericException
+import com.davidsalas.proxy.exchange.exception.HttpServerGenericException
+import com.davidsalas.proxy.exchange.exception.custom.HttpMethodNotSupportedException
 import com.davidsalas.proxy.exchange.model.Response
 import com.fasterxml.jackson.databind.JsonNode
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.springframework.cloud.gateway.mvc.ProxyExchange
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
@@ -13,9 +14,7 @@ import org.springframework.web.client.HttpServerErrorException
 
 
 @Service
-class ExchangeService(
-        private val mapper: ObjectMapper = jacksonObjectMapper()
-) {
+class ExchangeService {
 
     fun exchange(proxyExchange: ProxyExchange<JsonNode>, httpMethod: String): Response {
         return try {
@@ -27,12 +26,15 @@ class ExchangeService(
                 RequestMethod.HEAD.name -> toResponse(proxyExchange.head())
                 RequestMethod.OPTIONS.name -> toResponse(proxyExchange.options())
                 RequestMethod.PATCH.name -> toResponse(proxyExchange.patch())
-                else -> throw Exception(httpMethod)
+                else -> throw HttpMethodNotSupportedException(httpMethod)
             }
         } catch (e: Exception) {
             when (e) {
-                is HttpServerErrorException, is HttpClientErrorException -> {
-                    throw Exception()
+                is HttpServerErrorException -> {
+                    throw HttpServerGenericException(e.statusCode, e.responseBodyAsString)
+                }
+                is HttpClientErrorException -> {
+                    throw HttpClientGenericException(e.statusCode, e.responseBodyAsString)
                 }
                 else -> throw e
             }
@@ -41,7 +43,7 @@ class ExchangeService(
 
     private fun toResponse(response: ResponseEntity<JsonNode>): Response {
         return Response(
-                response.body ?: mapper.createObjectNode(),
+                response.body,
                 response.statusCode
         )
     }

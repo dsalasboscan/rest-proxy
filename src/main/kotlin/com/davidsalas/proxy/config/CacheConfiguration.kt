@@ -1,6 +1,6 @@
-package com.davidsalas.proxy.config.cache
+package com.davidsalas.proxy.config
 
-import com.davidsalas.proxy.exchange.info.ProxiedServiceInfo
+import com.davidsalas.proxy.exchange.info.ServiceInformation
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -14,9 +14,9 @@ class CacheConfiguration {
 
     @Bean
     fun redisTemplate(redisConnectionFactory: RedisConnectionFactory, objectMapper: ObjectMapper):
-            RedisTemplate<String, ProxiedServiceInfo> {
+            RedisTemplate<String, ServiceInformation> {
 
-        val template = RedisTemplate<String, ProxiedServiceInfo>()
+        val template = RedisTemplate<String, ServiceInformation>()
         template.setConnectionFactory(redisConnectionFactory)
         template.keySerializer = RedisSerializer.string()
         template.valueSerializer = GenericJackson2JsonRedisSerializer(objectMapper)

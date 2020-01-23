@@ -1,4 +1,4 @@
-package com.davidsalas.proxy.config.proxy
+package com.davidsalas.proxy.config
 
 import org.springframework.cloud.gateway.mvc.config.ProxyExchangeArgumentResolver
 import org.springframework.cloud.gateway.mvc.config.ProxyProperties

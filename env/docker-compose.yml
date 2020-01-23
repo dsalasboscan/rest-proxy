@@ -1,9 +1,13 @@
 version: '3'
 services:
   mongo:
-    image: mongo:latest
+    image: mongo:3.4
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./mongo/launch.sh:/tmp/launch.sh:ro
     ports:
-      - "27017:27017"
+      - "327017:27017"
+  redis:
+    image: redis:5.0.7
+    ports:
+      - "26379:6379"

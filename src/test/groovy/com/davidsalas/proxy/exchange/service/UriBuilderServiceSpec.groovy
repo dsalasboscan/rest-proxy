@@ -1,6 +1,5 @@
-package com.davidsalas.proxy
+package com.davidsalas.proxy.exchange.service
 
-import com.davidsalas.proxy.exchange.service.UriBuilderService
 import spock.lang.Specification
 
 class UriBuilderServiceSpec extends Specification {
@@ -82,4 +81,5 @@ class UriBuilderServiceSpec extends Specification {
         then:
         response == urlToNotFormat
     }
+
 }

@@ -4,6 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode
 import org.springframework.http.HttpStatus
 
 data class Response(
-        val payload: JsonNode,
+        val payload: JsonNode?,
         val httpStatus: HttpStatus
 )

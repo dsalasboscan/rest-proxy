@@ -2,13 +2,25 @@ spring:
   data:
     mongodb:
       host: localhost
-      port: 27017
+      port: 37017
       database: proxyDB
       repositories:
         type: auto
   redis:
     host: localhost
-    port: 6379
+    port: 36379
+
+proxy:
+  security:
+    principal-header: x-authorization
+    token: ENC(zotmLek1l/5EM8d3cpxs2E3Qj++EsEnV)
+  service-info:
+    cache:
+      ttl: 30 #TimeUnit seconds
+
+jasypt:
+  encryptor:
+    bean: encryptorBean
 
 server:
   port: 8081

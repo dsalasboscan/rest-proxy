@@ -4,4 +4,4 @@ import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface ProxiedServiceInfoRepository : MongoRepository<ProxiedServiceInfo, String>
+interface ServiceInformationRepository : MongoRepository<ServiceInformation, String>
