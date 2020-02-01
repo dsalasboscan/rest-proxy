@@ -31,6 +31,6 @@ own study on programming.
 * Request and response mutation*
 
 #### Request and response mutation:
-The project is prepared to have a single execution flow that prepares a request send it to
+The project is prepared to have a single execution flow that prepares a request to be send to
 an external service and modify the answer, in order to add a new mutation you only need to implement
 an interface an add the desired functionality.
