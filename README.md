@@ -23,7 +23,7 @@ own study on programming.
 ###### Spock for unit testing
 ###### MongoDb with SpringData
 ###### Spring context configuration
-###### Handling REST services exaction without try-catch blocks
+###### Handling REST services exception globally without try-catch blocks
 
 ## Features
 * security (Layer of security for services without it)
